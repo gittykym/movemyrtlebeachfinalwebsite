@@ -1,9 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
+import { useEffect } from 'react';
 import { Home, Warehouse, Users, Package, ChevronRight, Phone, CheckCircle } from 'lucide-react';
 
 const services = [
   {
+    id: 'residential',
     icon: Home,
     title: 'Residential Moving',
     description: 'Moving your home is one of the biggest decisions you\'ll make. Our residential moving team handles every item — from fragile antiques to heavy appliances — with professional care. All furniture is wrapped in moving pads and carefully transported.',
@@ -18,6 +20,7 @@ const services = [
     imageAlt: 'Professional residential movers Myrtle Beach SC',
   },
   {
+    id: 'storage',
     icon: Warehouse,
     title: 'Climate-Controlled Storage',
     description: 'Our brand new, state-of-the-art storage facility offers climate-controlled units with high ceilings, bright lighting, and 24/7 security. Perfect for short-term staging or long-term needs.',
@@ -32,6 +35,7 @@ const services = [
     imageAlt: 'Climate-controlled storage facility Myrtle Beach',
   },
   {
+    id: 'labor',
     icon: Users,
     title: 'Labor Only',
     description: 'Already have your own truck or POD? Our experienced labor crew handles all the heavy lifting. We load and/or unload your rental truck, container, or storage unit and bring all the equipment.',
@@ -46,6 +50,7 @@ const services = [
     imageAlt: 'Labor only movers loading a truck in Myrtle Beach SC',
   },
   {
+    id: 'packing',
     icon: Package,
     title: 'Packing Services',
     description: 'Let our dedicated packing team take packing completely off your plate. We use only high-grade boxes and materials to protect your belongings, and we work quickly so your timeline stays on track.',
@@ -62,6 +67,20 @@ const services = [
 ];
 
 export function ServicesPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
   return (
     <>
       <Helmet>
@@ -85,7 +104,7 @@ export function ServicesPage() {
       {/* Services */}
       <div className="max-w-5xl mx-auto px-4 py-12 md:py-16 space-y-16 md:space-y-24">
         {services.map((service, i) => (
-          <div key={i} className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${i % 2 === 1 ? 'md:[&>div:first-child]:order-2' : ''}`}>
+          <div key={i} id={service.id} className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${i % 2 === 1 ? 'md:[&>div:first-child]:order-2' : ''} scroll-mt-24`}>
             <div>
               <div className="w-14 h-14 bg-[#0162B3] bg-opacity-10 rounded-full flex items-center justify-center mb-4">
                 <service.icon className="w-7 h-7 text-[#0162B3]" />
