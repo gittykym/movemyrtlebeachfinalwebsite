@@ -57,23 +57,25 @@ export function Layout() {
                   Services <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
                 </Link>
                 {servicesOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
-                    <Link
-                      to="/services"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0162B3] transition font-semibold border-b border-gray-100 mb-1"
-                    >
-                      All Services
-                    </Link>
-                    {serviceLinks.map(({ to, icon: Icon, label }) => (
+                  <div className="absolute top-full left-0 pt-2 w-56 z-50">
+                    <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
                       <Link
-                        key={to}
-                        to={to}
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0162B3] transition"
+                        to="/services"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0162B3] transition font-semibold border-b border-gray-100 mb-1"
                       >
-                        <Icon className="w-4 h-4 text-[#0162B3]" />
-                        {label}
+                        All Services
                       </Link>
-                    ))}
+                      {serviceLinks.map(({ to, icon: Icon, label }) => (
+                        <Link
+                          key={to}
+                          to={to}
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0162B3] transition"
+                        >
+                          <Icon className="w-4 h-4 text-[#0162B3]" />
+                          {label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
